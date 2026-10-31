@@ -35,6 +35,15 @@ jobs:
         run: |
           chmod +x gradlew;./gradlew publish
 
+      - name: Inspect build directories
+        if: always()
+        run: |
+          echo "Build directories:"
+          find . -type d -name "build" -o -name "*staging*"
+      
+          echo "JAR artifacts:"
+          find . -type f -name "*.jar"
+
       - name: Remove Maven metadata
         run: |
           find build/central-staging \
