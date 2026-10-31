@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.sifisofakude.sdkmanager"
-version = "1.0.0"
+version = "1.0.0-beta"
 
 repositories {
     // Looks for external dependencies in the central Maven repository
