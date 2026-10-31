@@ -33,7 +33,7 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
           GPG_SIGNING_KEY: ${{ secrets.GPG_SIGNING_KEY }}
         run: |
-          ./gradlew publish
+          chmod +x gradlew;./gradlew publish
 
       - name: Remove Maven metadata
         run: |
