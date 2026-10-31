@@ -3,10 +3,12 @@ plugins {
     java
     // 2. Optional: Adds enhanced capabilities specifically for publishing reusable libraries
     `java-library`
+    `maven-publish`
+    signing
 }
 
 group = "io.github.sifisofakude.sdkmanager"
-version = "1.0.0"
+version = "1.0.13-beta"
 
 repositories {
     // Looks for external dependencies in the central Maven repository
@@ -46,4 +48,53 @@ java {
 tasks.test {
     // Instructs Gradle to use the JUnit Platform engine to discover and run tests
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+
+            artifactId = "sdkmanager"
+
+            pom {
+                name.set("SDK Manager")
+                description.set("Android SDK Manager library")
+                url.set("https://github.com/sifisofakude/android-sdkmanager")
+
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/license/mit")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("sifisofakude")
+                    }
+                }
+
+                scm {
+                    url.set("https://github.com/sifisofakude/android-sdkmanager.git")
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            name = "CentralStaging"
+            url = uri(layout.buildDirectory.dir("central-staging"))
+        }
+    }
+}
+
+signing {
+    val signingKey = System.getenv("GPG_SIGNING_KEY")
+    val signingPassword = System.getenv("GPG_PASSPHRASE")
+
+    useInMemoryPgpKeys(signingKey, signingPassword)
+
+    sign(publishing.publications)
 }
