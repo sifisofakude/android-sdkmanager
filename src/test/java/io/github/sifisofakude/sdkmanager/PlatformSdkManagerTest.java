@@ -16,7 +16,7 @@ public class PlatformSdkManagerTest	{
 	@Test
 	public void downloadPlatform() throws Exception	{
 		// PlatformsSdkManager sdkmanager = new PlatformsSdkManager();
-		assertTrue(sdkmanager.downloadPlatform("platforms;android-36","../libs"));
+		assertTrue(sdkmanager.downloadPlatform("platforms;android-36","../../libs"));
 	}
 
 	@Test
