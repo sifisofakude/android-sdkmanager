@@ -3,6 +3,8 @@ plugins {
     java
     // 2. Optional: Adds enhanced capabilities specifically for publishing reusable libraries
     `java-library`
+    `maven-publish`
+    signing
 }
 
 group = "io.github.sifisofakude.sdkmanager"
